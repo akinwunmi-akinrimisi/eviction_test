@@ -20,7 +20,7 @@ contract LudoGame {
 
     // Function for players to register
     function registerPlayer() public {
-        require(players.length < maxNumberOfPlayers, "Maximum players reached.");
+        require(players.length <= maxNumberOfPlayers, "Maximum players reached.");
         require(!gameStarted, "Game has already started.");
         require(playerPositions[msg.sender] == 0, "Player is already registered.");
 

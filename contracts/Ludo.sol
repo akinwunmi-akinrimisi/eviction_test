@@ -41,6 +41,32 @@ contract LudoGame {
         return players[currentPlayerIndex] == player;
     }
 
+
+// Function to move player based on dice result
+    function movePlayer(uint8 diceResult) internal {
+        uint8 currentPosition = playerPositions[msg.sender];
+        uint8 newPosition = currentPosition + diceResult;
+
+        // Handle the loop-around logic
+        if (newPosition > totalSpaceOnBoard) {
+            newPosition = newPosition % totalSpaceOnBoard;
+        }
+
+        playerPositions[msg.sender] = newPosition;
+    }
+
     
+    // Function to roll the dice
+    function rollDice() public {
+        require(gameStarted, "Game not started yet.");
+        require(!gameEnded, "Game has ended.");
+        require(msg.sender == players[currentPlayerIndex], "Not your turn.");
+
+        // Pseudorandom number generation
+        uint8 diceResult = uint8(keccak256(abi.encodePacked(block.timestamp, msg.sender, block.difficulty))) % 6 + 1;
+
+        
+    }
+
 }
 

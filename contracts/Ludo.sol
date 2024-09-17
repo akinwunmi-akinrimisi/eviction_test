@@ -24,8 +24,16 @@ contract LudoGame {
         require(!gameStarted, "Game has already started.");
         require(playerPositions[msg.sender] == 0, "Player is already registered.");
 
-        players.push(msg.sender); // Add player to the list
-        playerPositions[msg.sender] = 1; // Initial position is 1 (starting point)
+        players.push(msg.sender);                       // Add player to the list
+        playerPositions[msg.sender] = 1;                // Initial position is 1 (starting point)
+    }
+
+    // Function to start the game
+    function startGame() public {
+        require(players.length == maxNumberOfPlayers, "Need 4 players to start.");
+        require(!gameStarted, "Game already started.");
+
+        gameStarted = true;
     }
 
 }

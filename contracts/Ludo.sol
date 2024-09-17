@@ -65,7 +65,14 @@ contract LudoGame {
         // Pseudorandom number generation
         uint8 diceResult = uint8(keccak256(abi.encodePacked(block.timestamp, msg.sender, block.difficulty))) % 6 + 1;
 
-        
+        // Move the player
+        movePlayer(diceResult);
+
+        // Emit event for the dice roll and new position
+        emit DiceRolled(msg.sender, diceResult, playerPositions[msg.sender]);
+
+        // Move to the next player's turn
+        currentPlayerIndex = (currentPlayerIndex + 1) % maxNumberOfPlayers;
     }
 
 }

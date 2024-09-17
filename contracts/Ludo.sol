@@ -36,5 +36,11 @@ contract LudoGame {
         gameStarted = true;
     }
 
+    // Function to check if it's the correct player's turn
+    function isPlayerTurn(address player) internal view returns (bool) {
+        return players[currentPlayerIndex] == player;
+    }
+
+    
 }
 
